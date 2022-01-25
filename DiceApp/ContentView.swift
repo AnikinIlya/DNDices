@@ -9,15 +9,18 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var diceCount: Int = 1
-    @State var diceFace: Image = Image("dice1")
+    @State var diceFaceValue: [Image] = [Image("dice1")]
+    
     @State var minValueAlert: Bool = false
     @State var maxValueAlert: Bool = false
     
     // Randomizing function
     func DiceRandomizer(){
-        let diceValue = Int.random(in: 1...6)
-        self.diceFace = Image("dice\(diceValue)")
+        let count = diceFaceValue.count
+        diceFaceValue.removeAll()
+        for _ in 1...count{
+            diceFaceValue.append(Image("dice\(Int.random(in: 1...6))"))
+        }
     }
     
     var body: some View {
@@ -45,14 +48,14 @@ struct ContentView: View {
                     HStack{
                         Spacer()
                         
-                        diceFace
+                        diceFaceValue[0]
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 100)
                         Spacer()
                         
-                        if diceCount > 1{
-                            diceFace
+                        if diceFaceValue.count > 1{
+                            diceFaceValue[1]
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 100)
@@ -61,44 +64,8 @@ struct ContentView: View {
                         else{
                         }
                         
-                        if diceCount > 2{
-                            diceFace
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 100)
-                            Spacer()
-                        }
-                        else{
-                        }
-                    }
-                    Spacer()
-                    
-                    HStack{
-                        
-                        if diceCount > 3{
-                            Spacer()
-                            
-                            diceFace
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 100)
-                            Spacer()
-                        }
-                        else{
-                        }
-                        
-                        if diceCount > 4{
-                            diceFace
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 100)
-                            Spacer()
-                        }
-                        else{
-                        }
-                        
-                        if diceCount > 5{
-                            diceFace
+                        if diceFaceValue.count > 2{
+                            diceFaceValue[2]
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 100)
@@ -111,10 +78,10 @@ struct ContentView: View {
                     
                     HStack{
                         
-                        if diceCount > 6{
+                        if diceFaceValue.count > 3{
                             Spacer()
                             
-                            diceFace
+                            diceFaceValue[3]
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 100)
@@ -123,8 +90,8 @@ struct ContentView: View {
                         else{
                         }
                         
-                        if diceCount > 7{
-                            diceFace
+                        if diceFaceValue.count > 4{
+                            diceFaceValue[4]
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 100)
@@ -133,8 +100,44 @@ struct ContentView: View {
                         else{
                         }
                         
-                        if diceCount > 8{
-                            diceFace
+                        if diceFaceValue.count > 5{
+                            diceFaceValue[5]
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 100)
+                            Spacer()
+                        }
+                        else{
+                        }
+                    }
+                    Spacer()
+                    
+                    HStack{
+                        
+                        if diceFaceValue.count > 6{
+                            Spacer()
+                            
+                            diceFaceValue[6]
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 100)
+                            Spacer()
+                        }
+                        else{
+                        }
+                        
+                        if diceFaceValue.count > 7{
+                            diceFaceValue[7]
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 100)
+                            Spacer()
+                        }
+                        else{
+                        }
+                        
+                        if diceFaceValue.count > 8{
+                            diceFaceValue[8]
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 100)
@@ -151,8 +154,8 @@ struct ContentView: View {
                     Spacer()
                     // Button to decrease number of dices
                     Button(action: {
-                        if diceCount > 1{
-                            diceCount -= 1
+                        if diceFaceValue.count > 1{
+                            diceFaceValue.removeLast()
                         }
                         else{
                             minValueAlert.toggle()
@@ -175,8 +178,8 @@ struct ContentView: View {
                     
                     // Button to increase number of dices
                     Button(action: {
-                        if diceCount < 9{
-                            diceCount += 1
+                        if diceFaceValue.count < 9{
+                            diceFaceValue.append(Image("dice1"))
                         }
                         else{
                             maxValueAlert.toggle()
