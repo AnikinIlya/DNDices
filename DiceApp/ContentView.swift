@@ -13,8 +13,8 @@ struct ContentView: View {
     @State var diceFace: Image = Image("dice1")
     @State var minValueAlert: Bool = false
     @State var maxValueAlert: Bool = false
-
-// Randomizing function
+    
+    // Randomizing function
     func DiceRandomizer(){
         let diceValue = Int.random(in: 1...6)
         self.diceFace = Image("dice\(diceValue)")
@@ -23,7 +23,7 @@ struct ContentView: View {
     var body: some View {
         ZStack{
             
-// Logo and background
+            // Logo and background
             Image("background")
                 .resizable()
                 .ignoresSafeArea()
@@ -38,7 +38,7 @@ struct ContentView: View {
                     .frame(width: 200.0)
                 Spacer()
                 
-// Dices
+                // Dices
                 VStack{
                     Spacer()
                     
@@ -149,7 +149,7 @@ struct ContentView: View {
                 
                 HStack{
                     Spacer()
-// Button to decrease number of dices
+                    // Button to decrease number of dices
                     Button(action: {
                         if diceCount > 1{
                             diceCount -= 1
@@ -173,7 +173,7 @@ struct ContentView: View {
                         })
                     Spacer()
                     
-// Button to increase number of dices
+                    // Button to increase number of dices
                     Button(action: {
                         if diceCount < 9{
                             diceCount += 1
@@ -181,7 +181,6 @@ struct ContentView: View {
                         else{
                             maxValueAlert.toggle()
                         }
-                        
                     }, label: {
                         Image (systemName: "plus.square.fill")
                             .padding()
@@ -198,22 +197,23 @@ struct ContentView: View {
                         })
                     Spacer()
                     
-// Button to Roll dices
-                    Button("Roll Dice",
-                           action: {DiceRandomizer()})
-                        .padding()
-                        .padding(.horizontal)
-                        .background(.black)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
+                    // Button to Roll dices
+                    Button(action:
+                            {DiceRandomizer()
+                    }, label:{
+                        Text("Roll Dice")
+                            .padding()
+                            .padding(.horizontal)
+                            .background(.black)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    })
                     Spacer()
                 }
                 Spacer()
             }
-        } // End body
-        
-        
-    }
+        }
+    } // End body
 }
 
 struct ContentView_Previews: PreviewProvider {
