@@ -9,18 +9,24 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var diceNumber = 1
-    @State var diceFaceNumber: [Int] = []
-    @State var dice = [1]
+    @State var diceCount: Int = 1
+    @State var diceFace: Image = Image("dice1")
+    @State var minValueAlert: Bool = false
+    @State var maxValueAlert: Bool = false
+
+// Randomizing function
+    func DiceRandomizer(){
+        let diceValue = Int.random(in: 1...6)
+        self.diceFace = Image("dice\(diceValue)")
+    }
     
     var body: some View {
-        
         ZStack{
             
+// Logo and background
             Image("background")
                 .resizable()
                 .ignoresSafeArea()
-                
             
             VStack {
                 Spacer()
@@ -32,126 +38,124 @@ struct ContentView: View {
                     .frame(width: 200.0)
                 Spacer()
                 
+// Dices
+                VStack{
+                    Spacer()
                     
-                    VStack{
+                    HStack{
                         Spacer()
                         
-                        HStack{
+                        diceFace
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 100)
+                        Spacer()
+                        
+                        if diceCount > 1{
+                            diceFace
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 100)
                             Spacer()
-                            
-                            Image("dice\(dice[0])")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 100)
-                                Spacer()
-                            
-                            if diceNumber > 1{
-                                Image("dice\(dice[1])")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 100)
-                                Spacer()
-                            }
-                            else{
-                            }
-                            
-                            if diceNumber > 2{
-                                Image("dice\(dice[2])")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 100)
-                                Spacer()
-                            }
-                            else{
-                            }
                         }
-                        Spacer()
+                        else{
+                        }
                         
-                        HStack{
-                            
-                            if diceNumber > 3{
-                                Spacer()
-                            
-                                Image("dice\(dice[3])")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 100)
-                                Spacer()
-                            }
-                            else{
-                            }
-                            
-                            if diceNumber > 4{
-                                Image("dice\(dice[4])")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 100)
-                                Spacer()
-                            }
-                            else{
-                            }
-                            
-                            if diceNumber > 5{
-                                Image("dice\(dice[5])")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 100)
-                                Spacer()
-                            }
-                            else{
-                            }
+                        if diceCount > 2{
+                            diceFace
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 100)
+                            Spacer()
                         }
-                        Spacer()
-                        
-                        HStack{
-                            
-                            if diceNumber > 6{
-                                Spacer()
-                            
-                                Image("dice\(dice[6])")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 100)
-                                Spacer()
-                            }
-                            else{
-                            }
-                            
-                            if diceNumber > 7{
-                                Image("dice\(dice[7])")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 100)
-                                Spacer()
-                            }
-                            else{
-                            }
-                            
-                            if diceNumber > 8{
-                                Image("dice\(dice[8])")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 100)
-                                Spacer()
-                            }
-                            else{
-                            }
+                        else{
                         }
-                        Spacer()
                     }
                     Spacer()
                     
+                    HStack{
+                        
+                        if diceCount > 3{
+                            Spacer()
+                            
+                            diceFace
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 100)
+                            Spacer()
+                        }
+                        else{
+                        }
+                        
+                        if diceCount > 4{
+                            diceFace
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 100)
+                            Spacer()
+                        }
+                        else{
+                        }
+                        
+                        if diceCount > 5{
+                            diceFace
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 100)
+                            Spacer()
+                        }
+                        else{
+                        }
+                    }
+                    Spacer()
+                    
+                    HStack{
+                        
+                        if diceCount > 6{
+                            Spacer()
+                            
+                            diceFace
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 100)
+                            Spacer()
+                        }
+                        else{
+                        }
+                        
+                        if diceCount > 7{
+                            diceFace
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 100)
+                            Spacer()
+                        }
+                        else{
+                        }
+                        
+                        if diceCount > 8{
+                            diceFace
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 100)
+                            Spacer()
+                        }
+                        else{
+                        }
+                    }
+                    Spacer()
+                }
+                Spacer()
                 
                 HStack{
                     Spacer()
-                    
+// Button to decrease number of dices
                     Button(action: {
-                        if diceNumber > 1{
-                            diceNumber -= 1
-                            dice.removeLast()
+                        if diceCount > 1{
+                            diceCount -= 1
                         }
                         else{
-                            print("min number of dices")
+                            minValueAlert.toggle()
                         }
                         
                     }, label: {
@@ -161,15 +165,21 @@ struct ContentView: View {
                             .background(.black)
                             .cornerRadius(10)
                     })
+                        .alert(isPresented: $minValueAlert, content: {
+                            Alert(
+                                title: Text("Minimum number of dices"),
+                                message: Text("You have reached the minimum number of dices."),
+                                dismissButton: .cancel())
+                        })
                     Spacer()
                     
+// Button to increase number of dices
                     Button(action: {
-                        if diceNumber < 9{
-                            diceNumber += 1
-                            dice.append(1)
+                        if diceCount < 9{
+                            diceCount += 1
                         }
                         else{
-                            print("max number of dices")
+                            maxValueAlert.toggle()
                         }
                         
                     }, label: {
@@ -178,19 +188,19 @@ struct ContentView: View {
                             .tint(.white)
                             .background(.black)
                             .cornerRadius(10)
-                            
+                        
                     })
+                        .alert(isPresented: $maxValueAlert, content: {
+                            Alert(
+                                title: Text("Maximum number of dices"),
+                                message: Text("You have reached the maximum number of dices."),
+                                dismissButton: .cancel())
+                        })
                     Spacer()
                     
+// Button to Roll dices
                     Button("Roll Dice",
-                           action: {
-                        diceFaceNumber.removeAll()
-                        for i in dice{
-                            diceFaceNumber.append(Int.random(in: 1...6))
-                            dice = diceFaceNumber
-                        }
-
-                    })
+                           action: {DiceRandomizer()})
                         .padding()
                         .padding(.horizontal)
                         .background(.black)
@@ -200,13 +210,15 @@ struct ContentView: View {
                 }
                 Spacer()
             }
-        }
+        } // End body
+        
+        
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-.previewInterfaceOrientation(.portrait)
+            .previewInterfaceOrientation(.portrait)
     }
 }
